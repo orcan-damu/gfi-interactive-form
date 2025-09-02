@@ -1,0 +1,882 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BSB Entrepreneur KPI Assessment - Are You Ready to Scale? 🚀</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .form-container {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            width: 100%;
+            min-height: 600px;
+            position: relative;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #e0e0e0;
+            border-radius: 4px;
+            margin-bottom: 30px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4, #feca57);
+            border-radius: 4px;
+            transition: width 0.4s ease;
+            width: 0%;
+        }
+
+        .step {
+            display: none;
+            animation: slideIn 0.5s ease;
+        }
+
+        .step.active {
+            display: block;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .step-header {
+            margin-bottom: 30px;
+        }
+
+        .step-number {
+            color: #667eea;
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+        }
+
+        .step-title {
+            font-size: 28px;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            line-height: 1.3;
+        }
+
+        .step-description {
+            font-size: 16px;
+            color: #6c757d;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .james-quote {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a52);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px 0;
+            font-style: italic;
+            position: relative;
+        }
+
+        .james-quote:before {
+            content: '💬';
+            font-size: 20px;
+            position: absolute;
+            top: -5px;
+            right: 15px;
+            background: white;
+            padding: 5px;
+            border-radius: 50%;
+        }
+
+        .options {
+            margin: 30px 0;
+        }
+
+        .option {
+            background: #f8f9ff;
+            border: 2px solid #e0e6ff;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 15px 0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .option:hover {
+            border-color: #667eea;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.15);
+        }
+
+        .option.selected {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border-color: #667eea;
+        }
+
+        .option-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .option-points {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: #4CAF50;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .option.selected .option-points {
+            background: rgba(255,255,255,0.3);
+        }
+
+        .option-description {
+            font-size: 14px;
+            color: #6c757d;
+            line-height: 1.5;
+        }
+
+        .option.selected .option-description {
+            color: rgba(255,255,255,0.9);
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 40px;
+        }
+
+        .btn {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 25px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        .btn-secondary {
+            background: #f8f9fa;
+            color: #6c757d;
+            border: 2px solid #e9ecef;
+        }
+
+        .btn-secondary:hover {
+            background: #e9ecef;
+        }
+
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .score-card {
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        .total-score {
+            font-size: 72px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin: 20px 0;
+        }
+
+        .score-breakdown {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .score-item {
+            background: #f8f9ff;
+            padding: 20px;
+            border-radius: 15px;
+            border-left: 5px solid #667eea;
+        }
+
+        .score-item-title {
+            font-size: 14px;
+            color: #6c757d;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .score-item-value {
+            font-size: 24px;
+            font-weight: 700;
+            color: #2c3e50;
+        }
+
+        .congratulations {
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin: 30px 0;
+        }
+
+        .detailed-insights {
+            text-align: left;
+            margin: 30px 0;
+        }
+
+        .insight-section {
+            background: #fff;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 20px 0;
+            border-left: 5px solid #4CAF50;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+        }
+
+        .insight-section.needs-work {
+            border-left-color: #ff6b6b;
+            background: #fff5f5;
+        }
+
+        .insight-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .insight-content {
+            font-size: 16px;
+            line-height: 1.6;
+            color: #5a6c7d;
+            margin-bottom: 15px;
+        }
+
+        .action-items {
+            background: #f8f9ff;
+            padding: 20px;
+            border-radius: 12px;
+            margin-top: 15px;
+        }
+
+        .action-items h4 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
+        .action-items ul {
+            margin: 10px 0;
+            padding-left: 20px;
+        }
+
+        .action-items li {
+            margin: 8px 0;
+            line-height: 1.5;
+        }
+
+        .james-wisdom {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin: 25px 0;
+            font-style: italic;
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .form-container {
+                padding: 25px;
+            }
+            
+            .step-title {
+                font-size: 24px;
+            }
+            
+            .total-score {
+                font-size: 54px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="form-container">
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+
+            <!-- Welcome Step -->
+            <div class="step active" id="step-0">
+                <div class="step-header">
+                    <div class="step-number">Welcome Entrepreneur!</div>
+                    <div class="step-title">Ready for Skyrocketing Growth? 🚀</div>
+                    <div class="step-description">
+                        As James says: "Don't be mere listeners, be doers!" This KPI assessment will help you evaluate your business implementation of the BSB (Business Scaleup Blueprint) principles.
+                    </div>
+                </div>
+                
+                <div class="james-quote">
+                    Much success for an entrepreneur comes from his or her mindset. Get your numbers right - Business is all about playing with numbers, right? Facts over feelings, my dear friends!
+                </div>
+
+                <div style="margin: 30px 0;">
+                    <label style="display: block; margin-bottom: 10px; font-weight: 600;">Your Name:</label>
+                    <input type="text" id="userName" placeholder="Enter your name" style="width: 100%; padding: 15px; border: 2px solid #e0e6ff; border-radius: 10px; font-size: 16px;">
+                </div>
+
+                <div style="margin: 30px 0;">
+                    <label style="display: block; margin-bottom: 10px; font-weight: 600;">Company Name:</label>
+                    <input type="text" id="companyName" placeholder="Enter your company name" style="width: 100%; padding: 15px; border: 2px solid #e0e6ff; border-radius: 10px; font-size: 16px;">
+                </div>
+
+                <div class="navigation">
+                    <div></div>
+                    <button class="btn btn-primary" onclick="nextStep()">Let's Begin! 💪</button>
+                </div>
+            </div>
+
+            <!-- Results Step -->
+            <div class="step" id="results-step">
+                <div class="score-card">
+                    <div class="step-title">🎉 Your BSB Entrepreneur Score!</div>
+                    <div class="total-score" id="totalScore">0</div>
+                    <div style="font-size: 18px; color: #6c757d; margin-bottom: 30px;">out of 100 POWER POINTS</div>
+                    
+                    <div class="congratulations" id="congratsMessage">
+                        <!-- Dynamic message will be inserted here -->
+                    </div>
+
+                    <div class="score-breakdown" id="scoreBreakdown">
+                        <!-- Score breakdown will be inserted here -->
+                    </div>
+
+                    <div class="detailed-insights" id="detailedInsights">
+                        <!-- Detailed insights will be inserted here -->
+                    </div>
+
+                    <div class="james-wisdom">
+                        💫 "Remember, every expert was once a beginner, and every pro was once an amateur. The difference? They never gave up on implementing systems that work!" - James Vineeth
+                    </div>
+
+                    <div style="margin-top: 30px;">
+                        <button class="btn btn-primary" onclick="restartAssessment()">Take Assessment Again</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentStep = 0;
+        let scores = {};
+        let userName = '';
+        let companyName = '';
+
+        const kpiData = [
+            {
+                title: "Active in GFI (5 Points)",
+                points: 5,
+                description: "Being part of a growth-focused community like GFI accelerates your entrepreneurial journey through learning and networking.",
+                quote: "Cause has charisma! People follow the vision you stand for, not just your words.",
+                bsbModule: "Community engagement and continuous learning philosophy",
+                options: [
+                    { title: "BSB & Success Formula Certified + Weekly Networking", points: 5, description: "You're fully engaged and leveraging community power!" },
+                    { title: "BSB Certified Only", points: 2.5, description: "Great foundation! Add networking for compound growth." },
+                    { title: "Weekly Networking Only", points: 2.5, description: "Good networking! Get certified to strengthen foundation." },
+                    { title: "Not Done", points: 0, description: "Time to join! Community accelerates growth exponentially." }
+                ]
+            },
+            {
+                title: "BSB Growth Checklist (25 Points)",
+                points: 25,
+                description: "These are the core autopilot systems every business needs: Vision, Core Values, Daily Pledge, P&L/SET, and Budget Tracking.",
+                quote: "Your business cannot run without you, but it can run with less intervention. That's autopilot mode!",
+                bsbModule: "BSB Modules 1, 5, 8, 10, 11 - Core foundation systems",
+                options: [
+                    { title: "All 5 Systems Implemented", points: 25, description: "Outstanding! True autopilot mode achieved." },
+                    { title: "4 Systems Done", points: 20, description: "Excellent! One final push to complete the foundation." },
+                    { title: "3 Systems Done", points: 15, description: "Good momentum! Keep implementing these systems." },
+                    { title: "2 Systems Done", points: 10, description: "You've started! Consistency is key to success." },
+                    { title: "1 System Done", points: 5, description: "Every journey begins with a single step!" },
+                    { title: "Nothing Done", points: 0, description: "Time to start! Be doers, not just listeners!" }
+                ]
+            },
+            {
+                title: "KPI Implemented & Reviewed (10 Points)",
+                points: 10,
+                description: "KPI gamification is the heart of performance management. Without KPI, there is no growth!",
+                quote: "Never forget: Without KPI, there is no growth! You may have great strategies, but measuring performance gets results.",
+                bsbModule: "BSB Module 7 - KPI Gamification system",
+                options: [
+                    { title: "All Departments with Monthly Reviews", points: 10, description: "Perfect! Playing the numbers game like a pro." },
+                    { title: "Partially Done", points: 5, description: "Good start! Scale across all departments." },
+                    { title: "Not Started", points: 0, description: "Critical opportunity! Start with one department." }
+                ]
+            },
+            {
+                title: "Last Month P&L is Positive (5 Points)",
+                points: 5,
+                description: "Monthly P&L tracking using SET (Simplified Expenses Tracker) keeps you profitable and informed.",
+                quote: "Good leaders run their business based on facts, not feelings!",
+                bsbModule: "BSB Module 5 - BOSP & SET financial systems",
+                options: [
+                    { title: "Positive P&L", points: 5, description: "Excellent! You're on the path to skyrocketing growth!" },
+                    { title: "Not Tracked", points: 0, description: "Start immediately! Use SET format from BSB." },
+                    { title: "Negative P&L", points: 0, description: "Time to analyze and create your 'Sure Shot Goals.'" }
+                ]
+            },
+            {
+                title: "20% Sales Increase (10 Points)",
+                points: 10,
+                description: "Comparing last year to this year up to the current month. Growth is the lifeline of business.",
+                quote: "Set Sure Shot Goals to survive, and Breakthrough Goals for explosive growth!",
+                bsbModule: "BSB Module 5 - Goal setting and growth strategies",
+                options: [
+                    { title: "20%+ Increase", points: 10, description: "Outstanding! Breakthrough growth achieved!" },
+                    { title: "10% Increase", points: 5, description: "Good progress! Push towards breakthrough goal." },
+                    { title: "5% Increase", points: 2.5, description: "Steady growth. Implement aggressive strategies." },
+                    { title: "Less than 5%", points: 0, description: "Focus on Triple M strategy and value proposition." }
+                ]
+            },
+            {
+                title: "Employee Happiness (15 Points)",
+                points: 15,
+                description: "CLC (Career Ladder Chart), Hall of Fame, and Incentives create engaged, loyal teams.",
+                quote: "A group of donkeys led by a lion can defeat lions led by a donkey! Great people systems create results.",
+                bsbModule: "BSB Module 7 & 12 - Employee engagement systems",
+                options: [
+                    { title: "All Three: CLC + Hall of Fame + Incentives", points: 15, description: "Perfect! Building a world-class organization." },
+                    { title: "Any Two Systems", points: 10, description: "Great foundation! Add the third element." },
+                    { title: "One System Only", points: 5, description: "Good start! Scale up your people systems." },
+                    { title: "Nothing Done", points: 0, description: "Your people are waiting! Start with CLC system." }
+                ]
+            },
+            {
+                title: "Customer Happiness (10 Points)",
+                points: 10,
+                description: "Feedback calls and timely delivery create customer delight and sustainable growth.",
+                quote: "Money is a byproduct! People pay you because you solve their problems and pain points.",
+                bsbModule: "BSB Module 6 - Customer focus and problem-solving",
+                options: [
+                    { title: "Both: Feedback Calls + Timely Delivery", points: 10, description: "Excellent! Creating customer evangelists." },
+                    { title: "Feedback Calls Only", points: 5, description: "Good listening! Ensure consistent delivery." },
+                    { title: "Timely Delivery Only", points: 5, description: "Good execution! Add feedback loops." },
+                    { title: "Neither Done", points: 0, description: "Customers are your lifeline! Start with feedback." }
+                ]
+            },
+            {
+                title: "Personal Life Balance (10 Points)",
+                points: 10,
+                description: "Health activity (30 mins, 5 days/week) and family time. The 'Whole Person Concept' affects everything.",
+                quote: "If you are a great individual, it shows up everywhere. Work-life balance isn't luxury, it's necessity!",
+                bsbModule: "BSB Module 8 - Holistic personal development",
+                options: [
+                    { title: "Both: Health Activity + Family Time", points: 10, description: "Perfect balance! Modeling holistic success." },
+                    { title: "Health Activity Only", points: 5, description: "Good self-care! Add quality family time." },
+                    { title: "Family Time Only", points: 5, description: "Great priorities! Add health activities." },
+                    { title: "Neither Done", points: 0, description: "Start with 30 min health activity. Business needs you at 100%!" }
+                ]
+            },
+            {
+                title: "GFI Learning (5 Points)",
+                points: 5,
+                description: "Attending Thirstful Thursday sessions keeps you updated with latest strategies and insights.",
+                quote: "The moment you stop learning, you start becoming irrelevant. Stay hungry, stay curious!",
+                bsbModule: "Continuous learning emphasis across all BSB modules",
+                options: [
+                    { title: "Attended All Thirstful Thursdays", points: 5, description: "Fantastic commitment! Knowledge compounds." },
+                    { title: "Not Done", points: 0, description: "Make time for learning! Accelerates your growth." }
+                ]
+            },
+            {
+                title: "New Learning Per Week (5 Points)",
+                points: 5,
+                description: "Weekly learning from books, videos, courses, etc. Investing in your mind pays the best dividends.",
+                quote: "Leaders are readers! Invest in your mind - it pays the best dividends.",
+                bsbModule: "Personal development mindset throughout BSB program",
+                options: [
+                    { title: "Weekly Learning from Books/Videos/Courses", points: 5, description: "Excellent! Investing in your greatest asset - yourself." },
+                    { title: "Not Done", points: 0, description: "Start with 30 min weekly. Knowledge is power!" }
+                ]
+            }
+        ];
+
+        function updateProgress() {
+            const progress = (currentStep / (kpiData.length + 1)) * 100;
+            document.getElementById('progressFill').style.width = progress + '%';
+        }
+
+        function createKPISteps() {
+            const container = document.querySelector('.form-container');
+            const resultsStep = document.getElementById('results-step');
+            
+            kpiData.forEach((kpi, index) => {
+                const stepDiv = document.createElement('div');
+                stepDiv.className = 'step';
+                stepDiv.id = `step-${index + 1}`;
+                
+                stepDiv.innerHTML = `
+                    <div class="step-header">
+                        <div class="step-number">KPI ${index + 1} of ${kpiData.length}</div>
+                        <div class="step-title">${kpi.title}</div>
+                        <div class="step-description">${kpi.description}</div>
+                    </div>
+                    
+                    <div class="james-quote">${kpi.quote}</div>
+                    
+                    <div class="options">
+                        ${kpi.options.map((option, optIndex) => `
+                            <div class="option" onclick="selectOption(${index}, ${optIndex}, ${option.points})">
+                                <div class="option-points">${option.points} pts</div>
+                                <div class="option-title">${option.title}</div>
+                                <div class="option-description">${option.description}</div>
+                            </div>
+                        `).join('')}
+                    </div>
+                    
+                    <div class="navigation">
+                        <button class="btn btn-secondary" onclick="previousStep()" ${index === 0 ? 'style="visibility: hidden;"' : ''}>← Previous</button>
+                        <button class="btn btn-primary" id="next-${index}" onclick="nextStep()" disabled>
+                            ${index === kpiData.length - 1 ? 'See Results 🎯' : 'Next →'}
+                        </button>
+                    </div>
+                `;
+                
+                container.insertBefore(stepDiv, resultsStep);
+            });
+        }
+
+        function selectOption(kpiIndex, optionIndex, points) {
+            const stepDiv = document.getElementById(`step-${kpiIndex + 1}`);
+            const options = stepDiv.querySelectorAll('.option');
+            
+            options.forEach(option => option.classList.remove('selected'));
+            options[optionIndex].classList.add('selected');
+            
+            scores[kpiIndex] = points;
+            document.getElementById(`next-${kpiIndex}`).disabled = false;
+        }
+
+        function nextStep() {
+            if (currentStep === 0) {
+                userName = document.getElementById('userName').value.trim();
+                companyName = document.getElementById('companyName').value.trim();
+                
+                if (!userName || !companyName) {
+                    alert('Please enter your name and company name to continue.');
+                    return;
+                }
+            }
+            
+            if (currentStep <= kpiData.length) {
+                document.getElementById(`step-${currentStep}`).classList.remove('active');
+                currentStep++;
+                
+                if (currentStep > kpiData.length) {
+                    showResults();
+                } else {
+                    document.getElementById(`step-${currentStep}`).classList.add('active');
+                }
+                updateProgress();
+            }
+        }
+
+        function previousStep() {
+            if (currentStep > 0) {
+                document.getElementById(`step-${currentStep}`).classList.remove('active');
+                currentStep--;
+                document.getElementById(`step-${currentStep}`).classList.add('active');
+                updateProgress();
+            }
+        }
+
+        function generateDetailedInsights() {
+            let insights = '<h2 style="text-align: center; margin-bottom: 30px; color: #2c3e50;">🎯 Your Personal Growth Roadmap</h2>';
+            
+            const insightData = {
+                0: { // GFI Community
+                    strong: {
+                        title: "🔥 Community Champion Status!",
+                        content: "You're leveraging the power of community brilliantly! You understand that 'iron sharpens iron' and surround yourself with growth-minded entrepreneurs.",
+                        actions: ["Mentor other community members", "Share your success stories in networking sessions", "Lead networking initiatives", "Create accountability partnerships with fellow entrepreneurs"]
+                    },
+                    weak: {
+                        title: "🌱 Community Growth Opportunity",
+                        content: "You're missing the compound effect of community! James always says success leaves clues - and those clues are shared in communities like GFI.",
+                        actions: ["Get BSB certified immediately - it's your business foundation", "Attend weekly networking religiously", "Connect with 3 entrepreneurs monthly", "Share your journey - teaching accelerates learning"]
+                    }
+                },
+                1: { // BSB Systems
+                    strong: {
+                        title: "🚀 Autopilot Master!",
+                        content: "INCREDIBLE! You've built the foundation for a business that runs itself. Your systems are creating the freedom every entrepreneur dreams of!",
+                        actions: ["Fine-tune your existing systems monthly", "Train your team to manage systems independently", "Create backup systems for critical processes", "Document everything for seamless scaling"]
+                    },
+                    weak: {
+                        title: "⚡ Systems Implementation Priority",
+                        content: "This is your BIGGEST opportunity! These aren't just nice-to-haves - they're the difference between being a business owner and being owned BY your business.",
+                        actions: ["Start with Vision - print and display it TODAY", "Create Core Values with your team this week", "Implement SET (P&L tracking) immediately", "Set up daily pledge routine", "Install budget tracking system"]
+                    }
+                },
+                2: { // KPI Systems
+                    strong: {
+                        title: "📊 Performance Measurement Pro!",
+                        content: "You're playing the numbers game like a Fortune 500 CEO! Your KPI systems are creating accountability and driving results across your organization.",
+                        actions: ["Expand KPI to every role and department", "Create team leaderboards for friendly competition", "Implement monthly KPI celebration meetings", "Use KPI data for strategic decision making"]
+                    },
+                    weak: {
+                        title: "🎯 KPI Implementation Urgency",
+                        content: "Without KPI, you're managing blind! This single system will transform your business from guesswork to scientific growth.",
+                        actions: ["Choose one department to pilot KPI this month", "Create point systems for key activities (sales, customer service, etc.)", "Hold weekly KPI review meetings", "Celebrate KPI winners publicly", "Scale to all departments within 90 days"]
+                    }
+                },
+                3: { // P&L Tracking
+                    strong: {
+                        title: "💰 Financial Clarity Champion!",
+                        content: "You're running your business on facts, not feelings! Monthly P&L tracking keeps you profitable and in control of your financial destiny.",
+                        actions: ["Analyze P&L trends for strategic insights", "Set monthly profit targets beyond just revenue", "Optimize highest-cost categories", "Share financial wins with your team to build ownership"]
+                    },
+                    weak: {
+                        title: "📊 Financial Tracking Emergency",
+                        content: "Flying without financial instruments is business suicide! You need monthly P&L visibility to make smart decisions and stay profitable.",
+                        actions: ["Download and implement SET format immediately", "Convert all expenses to monthly amounts for clarity", "Set up 'Sure Shot' and 'Breakthrough' goals", "Track cash flow weekly", "Meet with accountant monthly for P&L review"]
+                    }
+                },
+                4: { // Sales Growth
+                    strong: {
+                        title: "📈 Growth Machine Activated!",
+                        content: "Your sales momentum is creating unstoppable business energy! You've moved from survival mode to breakthrough territory!",
+                        actions: ["Analyze what's driving your growth - do more of it!", "Set even bigger breakthrough goals", "Study your successful sales patterns", "Invest growth profits back into expansion"]
+                    },
+                    weak: {
+                        title: "🚀 Growth Acceleration Needed",
+                        content: "Stagnant sales kill dreams! Time to implement the Triple M strategy (Mind, Mastery, Money) for breakthrough results.",
+                        actions: ["Analyze your value proposition - is it compelling enough?", "Implement systematic referral programs", "Study your successful competitors' strategies", "Test new marketing channels monthly", "Focus on customer problem-solving, not just product pushing"]
+                    }
+                },
+                5: { // Employee Systems
+                    strong: {
+                        title: "👥 People Leadership Excellence!",
+                        content: "You understand that happy employees create happy customers! Your people systems are building a culture others envy!",
+                        actions: ["Create succession planning for key roles", "Implement peer recognition programs", "Survey employee satisfaction quarterly", "Develop more leaders within your organization"]
+                    },
+                    weak: {
+                        title: "💪 People Power Activation Required",
+                        content: "Your people are your competitive advantage - but only if they're engaged! Time to show them you care about their growth!",
+                        actions: ["Create Career Ladder Chart for every role", "Start Hall of Fame for top performers", "Design meaningful incentive programs beyond salary", "Hold monthly team appreciation events", "Ask employees: 'How can I help you grow?'"]
+                    }
+                },
+                6: { // Customer Focus
+                    strong: {
+                        title: "💎 Customer Experience Master!",
+                        content: "You're creating customer evangelists! When you obsess over customer happiness, they become your best marketing team!",
+                        actions: ["Create customer success stories database", "Implement customer loyalty programs", "Ask for referrals systematically", "Study customer feedback for innovation opportunities"]
+                    },
+                    weak: {
+                        title: "🎯 Customer Experience Upgrade Needed",
+                        content: "Customers are the lifeblood of your business! Without feedback and reliable delivery, you're playing a dangerous guessing game.",
+                        actions: ["Start monthly customer feedback calls", "Create delivery tracking systems with customers", "Implement service recovery procedures", "Train team on customer experience excellence", "Measure customer satisfaction monthly with NPS scores"]
+                    }
+                },
+                7: { // Personal Life
+                    strong: {
+                        title: "⚡ Life Balance Champion!",
+                        content: "You understand the 'Whole Person Concept'! Taking care of yourself and family gives you the energy to build an empire!",
+                        actions: ["Share your balance strategies with your team", "Create family traditions that energize you", "Maintain consistent health routines", "Plan regular family adventures"]
+                    },
+                    weak: {
+                        title: "🔋 Energy Management Crisis",
+                        content: "You can't pour from an empty cup! Your business needs you at 100%, but you're running on fumes and headed for burnout!",
+                        actions: ["Schedule 30 minutes daily for health activities", "Block weekly family time as sacred and non-negotiable", "Learn stress management techniques", "Create boundaries between work and personal life", "Remember: Your family is your WHY for building this business!"]
+                    }
+                },
+                8: { // GFI Learning
+                    strong: {
+                        title: "🧠 Knowledge Accumulator!",
+                        content: "You're staying ahead of the curve! Continuous learning through GFI sessions is your competitive advantage in a rapidly changing world!",
+                        actions: ["Share learnings with your team immediately", "Apply new concepts within 48 hours", "Create a business book club", "Teach others what you learn - teaching deepens understanding"]
+                    },
+                    weak: {
+                        title: "📚 Learning Gap Alert",
+                        content: "The moment you stop learning, you start becoming irrelevant! Your competition is studying while you're standing still!",
+                        actions: ["Block time weekly for Thirstful Thursday sessions", "Catch up on missed sessions immediately", "Join industry forums and groups", "Subscribe to relevant business podcasts", "Make learning a team activity, not just personal"]
+                    }
+                },
+                9: { // Personal Development
+                    strong: {
+                        title: "🌟 Self-Investment Master!",
+                        content: "You're investing in the asset that always appreciates - yourself! This mindset will compound into massive results over time!",
+                        actions: ["Create a personal development budget (10% of income)", "Track your learning and its business impact", "Share knowledge with others through teaching", "Implement learnings immediately, don't just consume"]
+                    },
+                    weak: {
+                        title: "💡 Personal Growth Stagnation",
+                        content: "Your mind is your most valuable asset - are you maintaining it? Personal development isn't optional for entrepreneurs - it's survival!",
+                        actions: ["Dedicate 30 minutes weekly to learning", "Read business biographies for inspiration", "Take online courses in your weak areas", "Join mastermind groups", "Invest 10% of income in personal development"]
+                    }
+                }
+            };
+
+            kpiData.forEach((kpi, index) => {
+                const score = scores[index] || 0;
+                const maxPoints = kpi.points;
+                const percentage = (score / maxPoints) * 100;
+                const isStrong = percentage >= 70;
+                
+                const insight = insightData[index][isStrong ? 'strong' : 'weak'];
+                
+                insights += `
+                    <div class="insight-section ${isStrong ? '' : 'needs-work'}">
+                        <div class="insight-title">
+                            ${insight.title}
+                            <span style="font-size: 16px; font-weight: 600;">(${score}/${maxPoints} points - ${Math.round(percentage)}%)</span>
+                        </div>
+                        <div class="insight-content">${insight.content}</div>
+                        <div style="font-size: 14px; color: #667eea; font-weight: 600; margin-bottom: 10px;">
+                            📚 BSB Reference: ${kpi.bsbModule}
+                        </div>
+                        <div class="action-items">
+                            <h4>🎯 Your Action Plan:</h4>
+                            <ul>
+                                ${insight.actions.map(action => `<li>${action}</li>`).join('')}
+                            </ul>
+                        </div>
+                    </div>
+                `;
+            });
+
+            return insights;
+        }
+
+        function showResults() {
+            const totalScore = Object.values(scores).reduce((sum, score) => sum + score, 0);
+            
+            document.getElementById('results-step').classList.add('active');
+            document.getElementById('totalScore').textContent = totalScore;
+            
+            const congratsDiv = document.getElementById('congratsMessage');
+            let message = '';
+            
+            if (totalScore >= 85) {
+                message = `🏆 HOLY MOLY, ${userName}! You're operating at WORLD-CLASS level! James would be incredibly proud - you're the definition of a BSB CHAMPION! ${companyName} is not just a business, it's a GROWTH MACHINE! You've mastered the art of skyrocketing growth!`;
+            } else if (totalScore >= 70) {
+                message = `🎯 FANTASTIC, ${userName}! You're crushing it with serious momentum! You've got the fundamentals DOWN and you're scaling like a pro! ${companyName} is positioned for breakthrough success! A few tweaks and you'll be unstoppable!`;
+            } else if (totalScore >= 50) {
+                message = `💪 Great progress, ${userName}! You've built a solid foundation and you're clearly committed to growth! ${companyName} has MASSIVE potential! James always says: 'Every expert was once a beginner' - and you're well on your journey!`;
+            } else if (totalScore >= 30) {
+                message = `🌟 ${userName}, you've started the journey and that's what matters most! James would tell you: 'The only person who can stop your growth is you by not taking action!' ${companyName} is ready for transformation - let's make it happen!`;
+            } else {
+                message = `🚀 ${userName}, welcome to your breakthrough moment! This assessment isn't about where you are, it's about where you're GOING! ${companyName} has unlimited potential, and now you have the roadmap! As James says: 'Be doers, not just listeners!' Your empire awaits!`;
+            }
+            
+            congratsDiv.innerHTML = message;
+            
+            const breakdownDiv = document.getElementById('scoreBreakdown');
+            breakdownDiv.innerHTML = kpiData.map((kpi, index) => {
+                const score = scores[index] || 0;
+                const percentage = Math.round((score / kpi.points) * 100);
+                const color = percentage >= 70 ? '#4CAF50' : percentage >= 40 ? '#ff9800' : '#f44336';
+                
+                return `
+                    <div class="score-item" style="border-left-color: ${color};">
+                        <div class="score-item-title">${kpi.title.replace(' (5 Points)', '').replace(' (10 Points)', '').replace(' (15 Points)', '').replace(' (25 Points)', '')}</div>
+                        <div class="score-item-value" style="color: ${color};">${score}/${kpi.points} (${percentage}%)</div>
+                    </div>
+                `;
+            }).join('');
+            
+            const insightsDiv = document.getElementById('detailedInsights');
+            insightsDiv.innerHTML = generateDetailedInsights();
+        }
+
+        function restartAssessment() {
+            currentStep = 0;
+            scores = {};
+            userName = '';
+            companyName = '';
+            
+            document.getElementById('userName').value = '';
+            document.getElementById('companyName').value = '';
+            
+            document.querySelectorAll('.step').forEach(step => {
+                step.classList.remove('active');
+            });
+            
+            document.querySelectorAll('.option').forEach(option => {
+                option.classList.remove('selected');
+            });
+            
+            document.querySelectorAll('[id^="next-"]').forEach(btn => {
+                btn.disabled = true;
+            });
+            
+            document.getElementById('step-0').classList.add('active');
+            updateProgress();
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            createKPISteps();
+            updateProgress();
+        });
+    </script>
+</body>
+</html>
